@@ -8,6 +8,7 @@ import {
 import { ChallengesContext } from './ChallengesContext'
 
 interface CountdownContextData {
+  hours: number
   minutes: number
   seconds: number
   hasFinished: boolean
@@ -29,19 +30,48 @@ let countdownTimeout: NodeJS.Timeout
  * O countdown precisa começar de um tempo e ir diminuindo em segundos.
  * (25 minutos * 60 segundos.)
  */
-const timeCountdown = 0.25
+
+const currentTime = new Date()
+const monthNames = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]
+const currentDay = currentTime.getDate()
+const currentMounth = monthNames[currentTime.getMonth()]
+const currentYear = currentTime.getFullYear()
+
+const newAlertTime = new Date(
+  `${currentMounth} ${currentDay} ${currentYear}  18:00:00`
+)
+
+const difference = newAlertTime.valueOf() - currentTime.valueOf()
 
 export function CountdownProvider({ children }: CountdownProviderProps) {
+  const minutesTo18H = (difference / 1000 / 60) % 60
+  const [timeCountdown, setTimeCountdown] = useState<any>()
   const { startNewChallenge } = useContext(ChallengesContext)
 
-  const [time, setTime] = useState(timeCountdown * 60)
+  const [time, setTime] = useState(minutesTo18H * 60)
+
   const [hasFinished, setHasFinished] = useState(false)
 
   // Estado da contage, se está ativa ou não, no começo está inativo.
   const [isActive, setIsActive] = useState(false)
 
-  // Retornando o número de minutos totais.
-  const minutes = Math.floor(time / 60)
+  // Retornando o número de horas totais.
+  const hours = Math.floor(time / 60 / 60)
+
+  const minutes = Math.floor((time / 60) % 60)
   // Retornando o resto da divisão.
   const seconds = time % 60
 
@@ -56,8 +86,12 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setIsActive(false)
     setHasFinished(false)
     // Voltando para o tempo total.
-    setTime(timeCountdown * 60)
+    setTime(timeCountdown)
   }
+
+  useEffect(() => {
+    setTimeCountdown(minutesTo18H * 60)
+  }, [minutesTo18H])
 
   useEffect(() => {
     // console.log(active);
@@ -80,6 +114,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   return (
     <CountdownContext.Provider
       value={{
+        hours,
         minutes,
         seconds,
         hasFinished,

@@ -2,7 +2,7 @@
 	{
 		"type": "body",
 		"description": "Estique um de seus braços com a palma da mão virada para frente e puxe os dedos para cima por 10 segundos por mão.",
-		"amount": 80
+		"amount": 180
 	},
 	{
 		"type": "body",
@@ -31,32 +31,22 @@
 	},
 	{
 		"type": "body",
-		"description": "Puxe o joelho de encontro ao peito e segure, troque de perna após 10 segundos.",
-		"amount": 50
-	},
-	{
-		"type": "body",
 		"description": "Sentado, cruze uma perna e incline seu tronco à frente, troque de perna após 10 segundos.",
 		"amount": 80
 	},
 	{
 		"type": "eye",
-		"description": "Sentado, feche os olhos e cubra-os com as palmas da mão durante 2 minutos, depois abra normalmente.",
-		"amount": 90
-	},
-	{
-		"type": "eye",
-		"description": "Em algum ambiente aberto, olhe o mais longe que puder em quatro direções por 3s, mexa apenas os olhos. Repita 3 vezes.",
+		"description": "Em pé agachar e sentar na cadeira durante 10 segundo",
 		"amount": 140
 	},
 	{
 		"type": "eye",
-		"description": "Usando os polegares, massage a área abaixo das sobrancelhas em movimentos circulares por 15 segundos.",
+		"description": "Alongue o pescoço levantando o queixo olhando para cima, depois abaxando encostando no peito",
 		"amount": 70
 	},
 	{
 		"type": "body",
-		"description": "Em pé, gire a cintura o máximo que puder para a esquerda, segure por cinco segundos. Repita para a direita.",
+		"description": "Sentado em uma cadeira coloque o tornozelo sobre o joelho contrário, forçar de leve o oelho da perna que está sobre a outra para baixo. Alternar lados.",
 		"amount": 90
 	}
 ]
