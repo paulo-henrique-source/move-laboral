@@ -43,14 +43,17 @@ export function Countdown() {
           </div>
         </div>
       ) : (
-        <div>
-          <label htmlFor="time">Insira o tempo do ciclo em horas</label>
+        <div className="timerDiv">
+          <label className="timerLabel" htmlFor="time">
+            Insira o tempo do ciclo.
+          </label>
           <br />
           <input
+            className="timerInput"
             name="time"
             id="time"
-            type="number"
-            placeholder="Exemplo: 1,5"
+            type="time"
+            placeholder="Exemplo: 1:25"
             onChange={handleSearchClient}
           />
         </div>

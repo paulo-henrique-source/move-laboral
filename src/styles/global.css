@@ -6,15 +6,15 @@
 
 :root {
     --white: #fff;
-    --background: #f2f3f5;
+    --background: rgb(240, 240, 240);
     --gray-line: #dcdde0;
     --text: #666666;
     --text-highlight: #b3b9ff;
     --title: #2e384d;
     --red: #e83f5b;
     --green: #4cd62b;
-    --blue: #5965e0;
-    --blue-dark: #4953b8;
+    --blue: #71E1EC;
+    --blue-dark: #46b1bb;
     --blue-twitter: #2aa9e0;
 }
 
@@ -31,14 +31,13 @@
 }
 
 body {
-    background: var(--background);
+    background: url('/yoga.svg') no-repeat 66vw 4vw;
+    background-size: 91vh;
     color: var(--text);
+    overflow: hidden;
 }
 
-body,
-input,
-textarea,
-button {
+body, input, textarea, button {
     font: 400 16px "Inter", sans-serif;
 }
 
@@ -49,4 +48,51 @@ button {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+.timerInput {
+    width: 40%;
+    height: 48px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    background: var(--gray-line);
+    box-shadow: 0 0 60px rgb(0 0 0 / 5%);
+    padding: 14px;
+}
+
+.timerLabel {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    width: 38%;
+    margin-right: 20px;
+}
+
+.timerDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileCard {
+    height: 100%;
+    background: var(--white);
+    border-radius: 5px;
+    -webkit-box-shadow: 0 0 60px rgb(0 0 0 / 5%);
+    box-shadow: 0 0 60px rgb(0 0 0 / 5%);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.top-right-gradient {
+    position: absolute;
+    top: -60%;
+    right: 90%;
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: linear-gradient(#95A4E6, #536DFE);
 }

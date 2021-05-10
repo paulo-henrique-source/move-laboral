@@ -7,6 +7,7 @@ import {
   useCallback,
 } from 'react'
 import { ChallengesContext } from './ChallengesContext'
+import moment from 'moment'
 
 interface CountdownContextData {
   hours: number
@@ -54,18 +55,10 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target
       try {
-        // setIsLoading(true)
-        if (parseFloat(value) > 0) {
-          setTime(parseFloat(value) * 60)
-          console.log(time)
-        } else {
-          alert('Valor muito baixo')
-        }
+        const formatValue = value.toString()
+        setTime(moment.duration(formatValue).asHours() * 60 * 60)
       } catch (err) {
         console.log(err)
-      } finally {
-        // setIsLoading(false)
-        console.log('finally')
       }
     },
     [time]
@@ -73,7 +66,6 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
 
   // Função para iniciar a contagem.
   function startCountdown() {
-    console.log(time)
     setIsActive(true)
   }
 

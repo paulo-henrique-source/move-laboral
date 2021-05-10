@@ -34,14 +34,14 @@ export default function Home(props: HomeProps) {
       >
         <div className={styles.container}>
           <Head>
-            <title>Início | move.it</title>
+            <title>Move.it</title>
           </Head>
-
+          <div className="top-right-gradient"></div>
           <ExperienceBar />
 
           <CountdownProvider>
             <section>
-              <div>
+              <div className="profileCard">
                 <Profile />
                 <CompletedChallenges />
                 <Countdown />
