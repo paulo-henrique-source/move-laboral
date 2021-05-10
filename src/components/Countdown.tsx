@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { CountdownContext } from '../contexts/CountdownContext'
 
 import styles from '../styles/components/Countdown.module.css'
@@ -10,46 +10,51 @@ export function Countdown() {
     seconds,
     hasFinished,
     isActive,
+    handleSearchClient,
     startCountdown,
     resetCountdown,
   } = useContext(CountdownContext)
 
   // Formatando o tempo para mostrar de uma maneira diferente.
-  // Retornando apenas o "primeiro" e o "segundo" número da hora.
-  const [hourLeft, hourRight] = String(hours).padStart(2, '0').split('')
   // Retornando apenas o "primeiro" e o "segundo" número do minuto.
+  const [hoursLeft, hoursRight] = String(hours).padStart(2, '0').split('')
+
   const [minuteLeft, minuteRight] = String(minutes).padStart(2, '0').split('')
   // Retornando apenas o "primeiro" e o "segundo" número do segundo.
   const [secondLeft, secondRight] = String(seconds).padStart(2, '0').split('')
 
-  useEffect(() => {
-    startCountdown()
-  })
-
-  useEffect(() => {
-    if (secondRight && secondLeft === '0') {
-      resetCountdown()
-    }
-  })
-
   return (
     <div>
-      <div className={styles.countdownContainer}>
-        <div>
-          <span>{hourLeft}</span>
-          <span>{hourRight}</span>
+      {isActive ? (
+        <div className={styles.countdownContainer}>
+          <div>
+            <span>{hoursLeft}</span>
+            <span>{hoursRight}</span>
+          </div>
+          <span>:</span>
+          <div>
+            <span>{minuteLeft}</span>
+            <span>{minuteRight}</span>
+          </div>
+          <span>:</span>
+          <div>
+            <span>{secondLeft}</span>
+            <span>{secondRight}</span>
+          </div>
         </div>
-        <span>:</span>
+      ) : (
         <div>
-          <span>{minuteLeft}</span>
-          <span>{minuteRight}</span>
+          <label htmlFor="time">Insira o tempo do ciclo em horas</label>
+          <br />
+          <input
+            name="time"
+            id="time"
+            type="number"
+            placeholder="Exemplo: 1,5"
+            onChange={handleSearchClient}
+          />
         </div>
-        <span>:</span>
-        <div>
-          <span id="secondLeft">{secondLeft}</span>
-          <span id="secondRight">{secondRight}</span>
-        </div>
-      </div>
+      )}
 
       {hasFinished ? (
         <button disabled className={styles.countdownButton}>
@@ -66,9 +71,15 @@ export function Countdown() {
               Abandonar ciclo
             </button>
           ) : (
-            <button type="button" className={styles.countdownButton}>
-              Iniciar um ciclo
-            </button>
+            <>
+              <button
+                type="button"
+                className={styles.countdownButton}
+                onClick={startCountdown}
+              >
+                Iniciar um ciclo
+              </button>
+            </>
           )}
         </>
       )}

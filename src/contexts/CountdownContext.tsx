@@ -4,6 +4,7 @@ import {
   useContext,
   useEffect,
   useState,
+  useCallback,
 } from 'react'
 import { ChallengesContext } from './ChallengesContext'
 
@@ -13,6 +14,7 @@ interface CountdownContextData {
   seconds: number
   hasFinished: boolean
   isActive: boolean
+  handleSearchClient: any
   startCountdown: () => void
   resetCountdown: () => void
 }
@@ -31,37 +33,10 @@ let countdownTimeout: NodeJS.Timeout
  * (25 minutos * 60 segundos.)
  */
 
-const currentTime = new Date()
-const monthNames = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-]
-const currentDay = currentTime.getDate()
-const currentMounth = monthNames[currentTime.getMonth()]
-const currentYear = currentTime.getFullYear()
-
-const newAlertTime = new Date(
-  `${currentMounth} ${currentDay} ${currentYear}  18:00:00`
-)
-
-const difference = newAlertTime.valueOf() - currentTime.valueOf()
-
 export function CountdownProvider({ children }: CountdownProviderProps) {
-  const minutesTo18H = (difference / 1000 / 60) % 60
-  const [timeCountdown, setTimeCountdown] = useState<any>()
   const { startNewChallenge } = useContext(ChallengesContext)
 
-  const [time, setTime] = useState(minutesTo18H * 60)
+  const [time, setTime] = useState(0)
 
   const [hasFinished, setHasFinished] = useState(false)
 
@@ -75,8 +50,30 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
   // Retornando o resto da divisão.
   const seconds = time % 60
 
+  const handleSearchClient = useCallback(
+    async (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { value } = event.target
+      try {
+        // setIsLoading(true)
+        if (parseFloat(value) > 0) {
+          setTime(parseFloat(value) * 60)
+          console.log(time)
+        } else {
+          alert('Valor muito baixo')
+        }
+      } catch (err) {
+        console.log(err)
+      } finally {
+        // setIsLoading(false)
+        console.log('finally')
+      }
+    },
+    [time]
+  )
+
   // Função para iniciar a contagem.
   function startCountdown() {
+    console.log(time)
     setIsActive(true)
   }
 
@@ -86,12 +83,8 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
     setIsActive(false)
     setHasFinished(false)
     // Voltando para o tempo total.
-    setTime(timeCountdown)
+    setTime(0)
   }
-
-  useEffect(() => {
-    setTimeCountdown(minutesTo18H * 60)
-  }, [minutesTo18H])
 
   useEffect(() => {
     // console.log(active);
@@ -119,6 +112,7 @@ export function CountdownProvider({ children }: CountdownProviderProps) {
         seconds,
         hasFinished,
         isActive,
+        handleSearchClient,
         startCountdown,
         resetCountdown,
       }}
