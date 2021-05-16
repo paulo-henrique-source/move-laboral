@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from 'react'
+import md5 from 'md5'
 import { useRouter } from 'next/router'
+import { useLogin } from '../../hooks/users/useLogin'
 
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { useCreateUser } from '../../hooks/users/useCreateUser'
 
 import Input from '../../Components/jsComponents/Input'
+
+import Swal from 'sweetalert2'
 
 const Dashboard: React.FC = () => {
   const createUser = useCreateUser()
@@ -18,11 +22,17 @@ const Dashboard: React.FC = () => {
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
+  const login = useLogin(emailInput, md5(passwordInput))
+
   const handleSubmit = (e) => {
     e.preventDefault()
-    sessionStorage.setItem('fix', emailInput)
-    sessionStorage.setItem('dix', passwordInput)
-    router.push('/')
+    if (login !== undefined) {
+      sessionStorage.setItem('fix', emailInput)
+      sessionStorage.setItem('dix', md5(passwordInput))
+      router.push('/')
+    } else {
+      Swal.fire('Ops...', 'Usuario ou senha invalido!', 'error')
+    }
   }
 
   const handleRegister = (e) => {
@@ -33,7 +43,7 @@ const Dashboard: React.FC = () => {
           input: {
             name: name,
             email: email,
-            password: password,
+            password: md5(password),
             level: 1,
             currentXP: 0,
             nextLevelXP: 16,
@@ -44,8 +54,15 @@ const Dashboard: React.FC = () => {
     } catch (error) {
       console.error(error)
     } finally {
-      // window.location.reload()
-      console.log('finaly')
+      Swal.fire(
+        'Bom trabalho!',
+        'Você criou seu usuario com sucesso!',
+        'success'
+      ).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload()
+        }
+      })
     }
   }
 
