@@ -1,19 +1,22 @@
-// import { useState } from "react";
-
-import "../styles/global.css";
+import '../styles/global.css'
+import { useRouter } from 'next/router'
+import { ApolloProvider } from '@apollo/client'
+import client from '../apollo-client'
 
 function MyApp({ Component, pageProps }) {
-    // const [level, setLevel] = useState(1);
+  const router = useRouter()
 
-    // function levelUp() {
-    //     setLevel(level + 1);
-    // }
-
-    return (
-        // <ChallengesContext.Provider value={{ level, levelUp }}>
-        <Component {...pageProps} />
-        // </ChallengesContext.Provider>
-    );
+  return (
+    <ApolloProvider client={client}>
+      <>
+        {router.pathname === '/' ? (
+          <Component {...pageProps} />
+        ) : (
+          <Component {...pageProps} />
+        )}
+      </>
+    </ApolloProvider>
+  )
 }
 
-export default MyApp;
+export default MyApp

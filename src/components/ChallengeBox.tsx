@@ -1,10 +1,13 @@
 import { useContext, useState } from 'react'
 import { ChallengesContext } from '../contexts/ChallengesContext'
 import { CountdownContext } from '../contexts/CountdownContext'
+import { useUpdateUser } from '../hooks/users/useUpdateUser'
 
 import styles from '../styles/components/ChallengeBox.module.css'
 
 export function ChallengeBox() {
+  const updateUser = useUpdateUser()
+
   const {
     activeChallenge,
     resetChallenge,
@@ -22,6 +25,12 @@ export function ChallengeBox() {
       startNewChallenge()
     } else {
       handleChallengeSucceeded()
+      // updateUser({
+      //   variables: {
+      //     id: parseInt(id),
+      //     input: { level, currentXP, nextLevelXP, challengesComplete },
+      //   },
+      // })
     }
   }
 

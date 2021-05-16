@@ -1,0 +1,38 @@
+.navbarMaster {
+  background-color: var(--First);
+}
+
+.titleNavbar {
+  margin-left: 10%;
+  color: var(--transparentButton) !important;
+}
+
+.titleUser {
+  color: var(--transparentButton);
+}
+
+@media (max-width: 870px) {
+  .navbarMaster {
+    background-color: var(--First);
+  }
+  .titleNavbar {
+    margin-left: 0%;
+    color: var(--transparentButton) !important;
+  }
+  .titleUser {
+    color: var(--transparentButton);
+  }
+}
+
+@media (max-width: 570px) {
+  .navbarMaster {
+    background-color: var(--First);
+  }
+  .titleNavbar {
+    margin-left: 0%;
+    color: var(--transparentButton) !important;
+  }
+  .titleUser {
+    color: var(--transparentButton);
+  }
+}

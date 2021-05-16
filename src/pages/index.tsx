@@ -19,11 +19,9 @@ interface HomeProps {
 }
 
 export default function Home(props: HomeProps) {
-  // console.log(props);
   const router = useRouter()
 
   if (router.isFallback) {
-    // your loading indicator
     return <div>loading...</div>
   } else {
     return (
@@ -32,25 +30,27 @@ export default function Home(props: HomeProps) {
         currentExp={props.currentExp}
         challengesCompleted={props.challengesCompleted}
       >
-        <div className={styles.container}>
-          <Head>
-            <title>Move.it</title>
-          </Head>
-          <div className="top-right-gradient"></div>
-          <ExperienceBar />
+        <div className="back">
+          <div className={styles.container}>
+            <Head>
+              <title>Move.it</title>
+            </Head>
+            <div className="top-right-gradient"></div>
+            <ExperienceBar />
 
-          <CountdownProvider>
-            <section>
-              <div className="profileCard">
-                <Profile />
-                <CompletedChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
+            <CountdownProvider>
+              <section>
+                <div className="profileCard">
+                  <Profile />
+                  <CompletedChallenges />
+                  <Countdown />
+                </div>
+                <div>
+                  <ChallengeBox />
+                </div>
+              </section>
+            </CountdownProvider>
+          </div>
         </div>
       </ChallengesProvider>
     )
