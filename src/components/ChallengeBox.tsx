@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { ChallengesContext } from '../contexts/ChallengesContext'
 import { CountdownContext } from '../contexts/CountdownContext'
 import { useUpdateUser } from '../hooks/users/useUpdateUser'
@@ -9,6 +9,11 @@ export function ChallengeBox() {
   const updateUser = useUpdateUser()
 
   const {
+    id,
+    level,
+    currentExp,
+    challengesCompleted,
+    experienceToNextLevel,
     activeChallenge,
     resetChallenge,
     completeChallenge,
@@ -16,6 +21,23 @@ export function ChallengeBox() {
   } = useContext(ChallengesContext)
   const { resetCountdown } = useContext(CountdownContext)
   const [countChallenge, setCountChallenge] = useState(0)
+  const [finish, setFinish] = useState(false)
+
+  useEffect(() => {
+    if (finish === true) {
+      updateUser({
+        variables: {
+          id: id,
+          input: {
+            level,
+            currentXP: currentExp,
+            nextLevelXP: experienceToNextLevel,
+            challengesComplete: challengesCompleted,
+          },
+        },
+      })
+    }
+  }, [finish, currentExp, experienceToNextLevel, challengesCompleted])
 
   // Função para resetar o countdown quando o usuário clicar em "falhei" ou "completei"
 
@@ -25,12 +47,7 @@ export function ChallengeBox() {
       startNewChallenge()
     } else {
       handleChallengeSucceeded()
-      // updateUser({
-      //   variables: {
-      //     id: parseInt(id),
-      //     input: { level, currentXP, nextLevelXP, challengesComplete },
-      //   },
-      // })
+      setFinish(true)
     }
   }
 

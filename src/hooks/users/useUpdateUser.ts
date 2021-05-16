@@ -2,7 +2,7 @@ import { gql, useMutation } from '@apollo/client'
 
 interface UpdateUserInput {
   variables: {
-    id: number
+    id: string
     input: {
       level: number
       currentXP: number
@@ -13,8 +13,8 @@ interface UpdateUserInput {
 }
 
 const UPDATE_USER = gql`
-  mutation UpdateUser($input: UpdateUserInput!) {
-    updateUser(input: $input) {
+  mutation UpdateUser($id: ID!, $input: UpdateUserInput!) {
+    updateUser(id: $id, input: $input) {
       id
       name
       level

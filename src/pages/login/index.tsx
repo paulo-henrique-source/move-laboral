@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useLogin } from '../../hooks/users/useLogin'
 
 import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
@@ -11,35 +10,23 @@ const Dashboard: React.FC = () => {
   const router = useRouter()
   const [isLoggin, setIsLoggin] = useState<boolean>(true)
   const [emailInput, setEmailInput] = useState<string>('')
-  const [password, setPassword] = useState<string>('')
-  const login = useLogin(emailInput, password)
-  // const {
-  //   setId,
-  //   setName,
-  //   setEmail,
-  //   setLevel,
-  //   setCurrentXP,
-  //   setNextLevelXP,
-  //   setChallengesComplete,
-  // } = useAuth()
+  const [passwordInput, setPasswordInput] = useState<string>('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    try {
-      const data = login
-      // setId(data.id)
-      // setName(data.name)
-      // setEmail(data.email)
-      // setLevel(data.level)
-      // setCurrentXP(data.currentXP)
-      // setNextLevelXP(data.nextLevelXP)
-      // setChallengesComplete(data.challengesComplete)
-    } catch (error) {
-      console.log(error)
-    } finally {
+    sessionStorage.setItem('fix', emailInput)
+    sessionStorage.setItem('dix', passwordInput)
+    router.push('/')
+  }
+
+  useEffect(() => {
+    if (sessionStorage.getItem('fix')) {
       router.push('/')
     }
-  }
+    if (sessionStorage.getItem('dix')) {
+      router.push('/')
+    }
+  }, [])
 
   return (
     <div
@@ -62,8 +49,8 @@ const Dashboard: React.FC = () => {
               placeholder="Senha"
               type="password"
               name="password"
-              onChange={(event) => setPassword(event.target.value)}
-              value={password}
+              onChange={(event) => setPasswordInput(event.target.value)}
+              value={passwordInput}
             />
             <input type="submit" value="Login" className="btn solid" />
           </form>

@@ -1,4 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+
+import { useLogin } from '../hooks/users/useLogin'
+
 import Cookies from 'js-cookie'
 
 import { LevelUpModal } from '../components/LevelUpModal'
@@ -11,6 +15,8 @@ interface Challenge {
   amount: number
 }
 interface ChallengesContextData {
+  id: string
+  name: string
   level: number
   currentExp: number
   activeChallenge: Challenge
@@ -36,7 +42,15 @@ export function ChallengesProvider({
   children,
   ...rest
 }: ChallengesProviderProps) {
+  const router = useRouter()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+
+  const login = useLogin(email, password)
+
   const [level, setLevel] = useState(rest.level ?? 1)
+  const [id, setId] = useState('')
+  const [name, setName] = useState('')
 
   // Estado atual da experiência do usuário.
   const [currentExp, setCurrentExp] = useState(rest.currentExp ?? 0)
@@ -58,6 +72,25 @@ export function ChallengesProvider({
   useEffect(() => {
     Notification.requestPermission()
   }, [])
+
+  useEffect(() => {
+    if (!sessionStorage.getItem('fix')) {
+      router.push('/login')
+    }
+    if (!sessionStorage.getItem('dix')) {
+      router.push('/login')
+    }
+    setEmail(sessionStorage.getItem('fix'))
+    setPassword(sessionStorage.getItem('dix'))
+  }, [])
+
+  useEffect(() => {
+    setId(login?.id)
+    setName(login?.name)
+    setLevel(login?.level)
+    setCurrentExp(login?.currentXP)
+    setChallengesCompleted(login?.challengesComplete)
+  }, [login])
 
   // Armazendo dados nos cookies.
   useEffect(() => {
@@ -123,6 +156,8 @@ export function ChallengesProvider({
   return (
     <ChallengesContext.Provider
       value={{
+        id,
+        name,
         level,
         currentExp,
         activeChallenge,
