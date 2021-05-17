@@ -115,7 +115,7 @@ const Dashboard: React.FC = () => {
 
                   <Input
                     icon={<FaUserAlt />}
-                    placeholder="Nome Completo"
+                    placeholder="Nome"
                     type="text"
                     name="name"
                     onChange={(event) => setName(event.target.value)}
