@@ -456,7 +456,8 @@ form.sign-in-form {
     grid-template-columns: 90% 29%;
     width: 120%;
     align-items: baseline;
-    margin-top: -22px;
+    margin-top: -40px;
+    margin-bottom: 20px;
 }
 
 .buttonContent {
