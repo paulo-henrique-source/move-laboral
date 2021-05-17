@@ -42,13 +42,8 @@ export function ChallengeBox() {
   // Função para resetar o countdown quando o usuário clicar em "falhei" ou "completei"
 
   function handleNextChallenge() {
-    if (countChallenge < 2) {
-      setCountChallenge(countChallenge + 1)
-      startNewChallenge()
-    } else {
-      handleChallengeSucceeded()
-      setFinish(true)
-    }
+    handleChallengeSucceeded()
+    setFinish(true)
   }
 
   function handleChallengeSucceeded() {

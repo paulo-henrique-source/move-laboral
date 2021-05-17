@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Head from 'next/head'
 import md5 from 'md5'
 import { useRouter } from 'next/router'
 import { useLogin } from '../../hooks/users/useLogin'
@@ -76,105 +77,107 @@ const Dashboard: React.FC = () => {
   }, [])
 
   return (
-    <div
-      className={isLoggin ? 'masterContainer' : 'masterContainer sign-up-mode'}
-    >
-      <div className="forms-masterContainer">
-        <div className="signin-signup">
-          <form onSubmit={handleSubmit} className="sign-in-form">
-            <h2 className="title">Entrar</h2>
-            <Input
-              icon={<FaUserAlt />}
-              placeholder="Email"
-              type="email"
-              name="email"
-              onChange={(event) => setEmailInput(event.target.value)}
-              value={emailInput}
-            />
-            <Input
-              icon={<FaLock />}
-              placeholder="Senha"
-              type="password"
-              name="password"
-              onChange={(event) => setPasswordInput(event.target.value)}
-              value={passwordInput}
-            />
-            <input type="submit" value="Login" className="btn solid" />
-          </form>
-          <form action="/" className="sign-up-form" onSubmit={handleRegister}>
-            <div className="modalCard">
-              <div className="fields">
-                <h2 className="title">Cadastre-se</h2>
+    <>
+      <Head>
+        <title>Move.it</title>
+      </Head>
+      <div
+        className={
+          isLoggin ? 'masterContainer' : 'masterContainer sign-up-mode'
+        }
+      >
+        <div className="forms-masterContainer">
+          <div className="signin-signup">
+            <form onSubmit={handleSubmit} className="sign-in-form">
+              <h2 className="title">Entrar</h2>
+              <Input
+                icon={<FaUserAlt />}
+                placeholder="Email"
+                type="email"
+                name="email"
+                onChange={(event) => setEmailInput(event.target.value)}
+                value={emailInput}
+              />
+              <Input
+                icon={<FaLock />}
+                placeholder="Senha"
+                type="password"
+                name="password"
+                onChange={(event) => setPasswordInput(event.target.value)}
+                value={passwordInput}
+              />
+              <input type="submit" value="Login" className="btn solid" />
+            </form>
+            <form action="/" className="sign-up-form" onSubmit={handleRegister}>
+              <div className="modalCard">
+                <div className="fields">
+                  <h2 className="title">Cadastre-se</h2>
 
-                <Input
-                  icon={<FaUserAlt />}
-                  placeholder="Nome Completo"
-                  type="text"
-                  name="name"
-                  onChange={(event) => setName(event.target.value)}
-                  value={name}
-                />
-                <Input
-                  icon={<MdEmail />}
-                  placeholder="Email"
-                  type="email"
-                  name="email"
-                  onChange={(event) => setEmail(event.target.value)}
-                  value={email}
-                />
-                <Input
-                  icon={<FaLock />}
-                  placeholder="Senha"
-                  type="password"
-                  name="password"
-                  onChange={(event) => setPassword(event.target.value)}
-                  value={password}
-                />
+                  <Input
+                    icon={<FaUserAlt />}
+                    placeholder="Nome Completo"
+                    type="text"
+                    name="name"
+                    onChange={(event) => setName(event.target.value)}
+                    value={name}
+                  />
+                  <Input
+                    icon={<MdEmail />}
+                    placeholder="Email"
+                    type="email"
+                    name="email"
+                    onChange={(event) => setEmail(event.target.value)}
+                    value={email}
+                  />
+                  <Input
+                    icon={<FaLock />}
+                    placeholder="Senha"
+                    type="password"
+                    name="password"
+                    onChange={(event) => setPassword(event.target.value)}
+                    value={password}
+                  />
 
-                <input type="submit" className="btn" value="Cadastrar" />
+                  <input type="submit" className="btn" value="Cadastrar" />
+                </div>
               </div>
+            </form>
+          </div>
+        </div>
+        <div className="panels-masterContainer">
+          <div className="panel left-panel">
+            <div className="masterContent">
+              <h3>Novo aqui ?</h3>
+              <p>Cadastre-se agora mesmo para começar seus exercicios.</p>
+              <button
+                className="btn transparent"
+                onClick={() => {
+                  setIsLoggin(false)
+                }}
+              >
+                Cadastre-se
+              </button>
+              <img src="/log3.svg" className="image" />
             </div>
-          </form>
-        </div>
-      </div>
-      <div className="panels-masterContainer">
-        <div className="panel left-panel">
-          <div className="masterContent">
-            <h3>Novo aqui ?</h3>
-            <p>
-              Cadastre-se agora mesmo para começar seus exercicios, ou até mesmo
-              perder alguns kilinhos !
-            </p>
-            <button
-              className="btn transparent"
-              onClick={() => {
-                setIsLoggin(false)
-              }}
-            >
-              Cadastre-se
-            </button>
-            <img src="/log.svg" className="image" />
+          </div>
+          <div className="panel right-panel">
+            <div className="masterContent">
+              <h3>Possui uma Conta ?</h3>
+              <p>Entre agora mesmo e comece a praticar ginastica laboral.</p>
+              <button
+                className="btn transparent"
+                onClick={() => {
+                  setIsLoggin(true)
+                }}
+              >
+                Entrar
+              </button>
+            </div>
+            <img src="/register.svg" className="image" />
           </div>
         </div>
-        <div className="panel right-panel">
-          <div className="masterContent">
-            <h3>Possui uma Conta ?</h3>
-            <p>
-              Entre agora mesmo e confira as novidades do mundo da psicologia.
-            </p>
-            <button
-              className="btn transparent"
-              onClick={() => {
-                setIsLoggin(true)
-              }}
-            >
-              Entrar
-            </button>
-          </div>
-          <img src="/register.svg" className="image" />
-        </div>
       </div>
-    </div>
+    </>
   )
 }
 

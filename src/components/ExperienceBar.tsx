@@ -10,12 +10,16 @@ export function ExperienceBar() {
     Math.round(currentExp * 100) / experienceToNextLevel
 
   return (
-    <header className={styles.experienceBar}>
-      <span>{currentExp} xp</span>
+    <div className="headerNav">
       <div>
-        <div style={{ width: `${percentToNextLevel}%` }} />
+        <header className={styles.experienceBar}>
+          <span>{currentExp} xp</span>
+          <div>
+            <div style={{ width: `${percentToNextLevel}%` }} />
+          </div>
+          <span>{experienceToNextLevel} xp</span>
+        </header>
       </div>
-      <span>{experienceToNextLevel} xp</span>
-    </header>
+    </div>
   )
 }

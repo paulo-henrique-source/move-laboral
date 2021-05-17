@@ -21,6 +21,11 @@ interface HomeProps {
 export default function Home(props: HomeProps) {
   const router = useRouter()
 
+  function handleLogout() {
+    sessionStorage.clear()
+    router.push('/login')
+  }
+
   if (router.isFallback) {
     return <div>loading...</div>
   } else {
@@ -36,7 +41,16 @@ export default function Home(props: HomeProps) {
               <title>Move.it</title>
             </Head>
             <div className="top-right-gradient"></div>
-            <ExperienceBar />
+            <div className="headerNav">
+              <div>
+                <ExperienceBar />
+              </div>
+              <div className="buttonContent">
+                <button onClick={handleLogout} className="buttonLogout">
+                  Logout
+                </button>
+              </div>
+            </div>
 
             <CountdownProvider>
               <section>

@@ -13,12 +13,12 @@
     --title: #2e384d;
     --red: #e83f5b;
     --green: #4cd62b;
-    --blue: #71E1EC;
-    --blue-dark: #46b1bb;
+    --blue: #536DFE;
+    --blue-dark: #2040f8;
     --blue-twitter: #2aa9e0;
-    --First: #022857;
-    --FirstHover: #064288;
-    --FirstLight: #02408b;
+    --First: #536DFE;
+    --FirstHover: #2040f8;
+    --FirstLight: #768bff;
     --Second: #0A66C2;
     --fontColor: rgba(0, 0, 0, 0.87);
     --fontColorLight: #444;
@@ -79,7 +79,7 @@ a {
 
 .profileCard {
     height: 100%;
-    background: var(--white);
+    background: rgba(83, 109, 254, 0.5);
     border-radius: 5px;
     -webkit-box-shadow: 0 0 60px rgb(0 0 0 / 5%);
     box-shadow: 0 0 60px rgb(0 0 0 / 5%);
@@ -310,7 +310,9 @@ form.sign-in-form {
 }
 
 .image {
-    width: 100%;
+    margin-top: 45px;
+    margin-left: -34px;
+    width: 83%;
     transition: transform 1.1s ease-in-out;
     transition-delay: 0.4s;
 }
@@ -411,6 +413,55 @@ form.sign-in-form {
 
 .masterContainer.sign-up-mode .right-panel {
     pointer-events: all;
+}
+
+.buttonLogout {
+    width: 45%;
+    height: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 5px;
+    background: var(--blue);
+    color: #2e384d;
+    border: 1px solid #2e384d;
+    font-size: 0.9rem;
+    font-weight: 600;
+    -webkit-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+}
+
+.buttonLogout:not(:disabled):hover {
+    background: var(--blue-dark);
+}
+
+.buttonLogout:disabled {
+    background: var(--white);
+    color: var(--text);
+    cursor: not-allowed;
+}
+
+.back {
+    background: url(/yoga.svg) no-repeat 66vw 4vw;
+    background-size: 91vh;
+    color: var(--text);
+    overflow: hidden;
+}
+
+.headerNav {
+    display: grid;
+    grid-template-columns: 90% 29%;
+    width: 120%;
+    align-items: baseline;
+    margin-top: -22px;
+}
+
+.buttonContent {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
 }
 
 @media (max-width: 870px) {

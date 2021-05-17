@@ -3,7 +3,7 @@
     align-items: center;
 }
 
-.profileContainer > img {
+.profileContainer>img {
     width: 5.5rem;
     height: 5.5rem;
     border-radius: 50%;
@@ -16,15 +16,26 @@
 .profileContainer div strong {
     font-size: 1.5rem;
     font-weight: 600;
-
     color: var(--title);
 }
 
 .profileContainer div p {
     font-size: 1rem;
     margin-top: 0.5rem;
+    min-width: 74px;
 }
 
 .profileContainer div p img {
     margin-right: 0.5rem;
+}
+
+.perfilContainer {
+    display: grid;
+    grid-template-columns: 99% 1%;
+}
+
+.space {
+    width: 60%;
+    display: flex;
+    justify-content: flex-end;
 }
