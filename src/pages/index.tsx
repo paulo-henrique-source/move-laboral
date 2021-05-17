@@ -8,7 +8,7 @@ import { FaUserAlt, FaLock } from 'react-icons/fa'
 import { MdEmail } from 'react-icons/md'
 import { useCreateUser } from '../hooks/users/useCreateUser'
 
-import Input from '../Components/jsComponents/Input'
+import Input from '../Components/jsComponents/Input/index'
 
 import Swal from 'sweetalert2'
 
