@@ -78,8 +78,9 @@ a {
 }
 
 .profileCard {
-    height: 100%;
-    background: rgba(83, 109, 254, 0.5);
+    height: 95%;
+    padding: 26px;
+    background: rgba(83, 109, 254, 0.1);
     border-radius: 5px;
     -webkit-box-shadow: 0 0 60px rgb(0 0 0 / 5%);
     box-shadow: 0 0 60px rgb(0 0 0 / 5%);
