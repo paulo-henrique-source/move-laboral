@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { useLogin } from '../hooks/users/useLogin'
 
 import md5 from 'md5'
+import Swal from 'sweetalert2'
 
 import Cookies from 'js-cookie'
 
@@ -53,6 +54,7 @@ export function ChallengesProvider({
   const [level, setLevel] = useState(rest.level ?? 1)
   const [id, setId] = useState('')
   const [name, setName] = useState('')
+  const [image, setImage] = useState(false)
 
   // Estado atual da experiência do usuário.
   const [currentExp, setCurrentExp] = useState(rest.currentExp ?? 0)
@@ -101,6 +103,21 @@ export function ChallengesProvider({
     Cookies.set('challengesCompleted', String(challengesCompleted))
   }, [level, currentExp, challengesCompleted])
 
+  useEffect(() => {
+    if (image === true) {
+      Swal.fire({
+        imageUrl: '/laboral.png',
+        imageHeight: 440,
+        imageWidth: 995,
+        imageAlt: 'A tall image',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          setImage(false)
+        }
+      })
+    }
+  }, [image])
+
   function levelUp() {
     setLevel(level + 1)
     setIsLevelUpModalOpen(true)
@@ -113,6 +130,7 @@ export function ChallengesProvider({
 
   // Função para disparar um novo desafio.
   function startNewChallenge() {
+    setImage(true)
     const randomChallengeIndex = Math.floor(Math.random() * challenges.length)
 
     const challenge = challenges[randomChallengeIndex]

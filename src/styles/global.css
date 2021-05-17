@@ -466,6 +466,10 @@ form.sign-in-form {
     justify-content: flex-end;
 }
 
+.swal2-container.swal2-center>.swal2-popup {
+    width: 1100px;
+}
+
 @media (max-width: 870px) {
     .masterContainer {
         min-height: 800px;

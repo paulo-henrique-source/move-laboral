@@ -1,4 +1,5 @@
 import { useContext, useState, useEffect } from 'react'
+import Swal from 'sweetalert2'
 import { ChallengesContext } from '../contexts/ChallengesContext'
 import { CountdownContext } from '../contexts/CountdownContext'
 import { useUpdateUser } from '../hooks/users/useUpdateUser'
@@ -20,7 +21,7 @@ export function ChallengeBox() {
     startNewChallenge,
   } = useContext(ChallengesContext)
   const { resetCountdown } = useContext(CountdownContext)
-  const [countChallenge, setCountChallenge] = useState(0)
+
   const [finish, setFinish] = useState(false)
 
   useEffect(() => {
